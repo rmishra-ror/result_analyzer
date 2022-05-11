@@ -86,6 +86,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_interaction (4.1.0)
+      activemodel (>= 5, < 8)
+      activesupport (>= 5, < 8)
     activejob (6.1.5.1)
       activesupport (= 6.1.5.1)
       globalid (>= 0.3.6)
@@ -94,6 +97,8 @@ GEM
     activerecord (6.1.5.1)
       activemodel (= 6.1.5.1)
       activesupport (= 6.1.5.1)
+    activerecord-import (1.4.0)
+      activerecord (>= 4.2)
     activestorage (6.1.5.1)
       actionpack (= 6.1.5.1)
       activejob (= 6.1.5.1)
@@ -326,6 +331,8 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  active_interaction (~> 4.1)
+  activerecord-import
   bootsnap (>= 1.4.4)
   byebug
   cucumber-rails
