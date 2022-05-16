@@ -1,6 +1,6 @@
 class MonthlyAverageInteraction < ActiveInteraction::Base
   MIN_AGGREATED_RESULT_COUNT =  200
-  RESULT_STATS_DAYS = 5
+  RESULT_STATS_DAYS = 4
 
   def execute
     date = Date.today # To run this function for old date change the date to old value
@@ -33,13 +33,13 @@ class MonthlyAverageInteraction < ActiveInteraction::Base
   end
 
   def min_aggregated_date_subject_wise(start_date)
-    end_date = (start_date - RESULT_STATS_DAYS)
+    end_date = (start_date - RESULT_STATS_DAYS) # going back for 5 days
     subject_wise_result_count = DailyResultStat.where('date >= ? and date <= ?', end_date, start_date)
                                                .group(:subject).sum(:result_count)
     subject_with_min_avg_count = subject_wise_result_count.select { |_s, v| v >= MIN_AGGREATED_RESULT_COUNT }
 
     subjects = subject_with_min_avg_count.collect do |subject, value|
-      { subject: subject, date: start_date, count: value }
+      { subject: subject, date: end_date, count: value }
     end
     # filter out subjects for which count < MIN_AGGREATED_RESULT_COUNT in last N days
     subject_list = subject_wise_result_count.collect { |s, v| s if v < MIN_AGGREATED_RESULT_COUNT }.compact
@@ -54,6 +54,7 @@ class MonthlyAverageInteraction < ActiveInteraction::Base
         sum += r.result_count
         sum >= MIN_AGGREATED_RESULT_COUNT
       end
+
       subjects << { subject: subject, date: record.date, count: sum }
     end
     subjects
