@@ -55,3 +55,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_interaction', '~> 4.1'
 gem 'activerecord-import'
+gem 'whenever', require: false
+
