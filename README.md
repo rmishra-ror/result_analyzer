@@ -13,6 +13,19 @@ ResultsDatum model is used to store results data.
 **POST `/results_data`** API is used to recieve results data.
 its accepts array of [subject, timestamp, marks]
 
+**Sampel CURL request:**
+```
+curl -X POST \
+  http://localhost:3000/results_data \
+  -H 'content-type: application/json' \
+  -d '{
+"data":[
+  {"subject": "Hindi", "timestamp": "2022-04-18 13:37:26.678", "marks": 100},
+  {"subject": "Hindi", "timestamp": "2022-04-18 15:33:23.678", "marks": 50}
+]
+}'
+```
+
 **DailyResultStat** is used to store daily stats at every 11:00 pm bt analyzing ResultDatum data.
 **MonthlyAverage** is used to store monthly stats by analyzing DailyResultStat data.
 
